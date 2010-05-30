@@ -4,6 +4,9 @@ jQuery Validation plugin for Formtastic.
 
 Validation for Formtastic that uses the same markup as Formtastic so you only have to style things once.
 
+Gotcha: currently only supports the list format for errors, which you set in the formtastic initilizer.
+
+
 Installation and Usage:
 
 1. Include JQuery, Valtastic, and application.js
@@ -17,8 +20,14 @@ $(document).ready(function(){
   $('.formtastic').valtastic();
 });
 
+3. In config/initializers/formtastic.rb
 
-3. Customization:
+Formtastic::SemanticFormBuilder.inline_errors = :list
+
+(support for sentance structure coming soon)
+
+
+4. Customization:
 
 Valtastic performs validation based on the class name of the li surrounding the input field.
 

@@ -8,10 +8,8 @@
 //  * Minimized Version
 //  * Support for select boxes
 //  * Support for checks and radios
-//  * Add more default classes.
-//  * jUnit Testing
+//  * Add more default classes
 //  * Documentation
-//  * Support classes on different elements/selectors.
 
 
 // Unique Array Helper Method.
@@ -93,7 +91,8 @@ if (!Array.unique){
       // Run validation checks on current input value.
       var validate = function(){
         errors = []; //Starting validation again, so reset errors.
-        value = $input_element.val();
+        value = $input_element.val();        
+        
         $.each(classes,function(){
           if (requirements = options[this]){
             if (requirements.required && value.length < 1) {
@@ -122,8 +121,8 @@ if (!Array.unique){
 
       // Reset and display error list. Set wrapper li class to .error
       var displayErrors = function(){
-         $input_element.siblings('ul.errors').remove();
-         $input_element.closest('li').removeClass('valid').addClass('error').append('<ul class="errors"><li>'+errors.join('</li><li>')+'</li></ul>');
+        $input_element.siblings('ul.errors').remove();
+        $input_element.closest('li').removeClass('valid').addClass('error').append('<ul class="errors"><li>'+errors.join('</li><li>')+'</li></ul>');
       };
 
       // Remove error list, set wrapper class to .valid
@@ -138,9 +137,13 @@ if (!Array.unique){
   }; // End Valtastic
   
 
-  $.fn.valtastic = function(options) {
-    var defaults = {
-      //Default Options
+  $.fn.valtastic = function(options) {    
+    
+    var defaults = {   
+      // Error Display Options
+      // error_display: 'list',
+      
+      // Default Options
       required: {
         required: true
       },
@@ -156,8 +159,10 @@ if (!Array.unique){
         message: 'must match password',
       }
     };
+    
     //Override defaults with options from valtastic call.
-    var options = $.extend(defaults,options);
+    var options = $.extend(defaults,options);    
+    
     return this.each(function(){
       var element = $(this);
 
