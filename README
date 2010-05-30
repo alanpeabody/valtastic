@@ -2,4 +2,68 @@ Valtastic 0.1
 
 jQuery Validation plugin for Formtastic.
 
-Readme & documentation coming soon.
+Validation for Formtastic that uses the same markup as Formtastic so you only have to style things once.
+
+Installation and Usage:
+
+1. Include JQuery, Valtastic, and application.js
+
+<%= javascript_include_tag 'jquery-1.4.2.min', 'rails', 'valtastic/jquery.valtastic', :cache => :jquery %>
+<%= javascript_include_tag 'application', :cache => :application %>
+
+2. In application.js
+
+$(document).ready(function(){
+  $('.formtastic').valtastic();
+});
+
+
+3. Customization:
+
+Valtastic performs validation based on the class name of the li surrounding the input field.
+
+Every class name may have up to five rules. The rules are:
+
+* required: checks that field is not empty.
+* min_length: length that the field must be greater then or equal to.
+* max_length: length that the field must be less then or equal to.
+* regex: a javascript regular expression that the field must match.
+* must_match: a string that will be evaluated as a jquery selector, used for password/email confirmations.
+
+In addition you can pass in a message that will be displayed any of the validation rules fail.
+
+
+The default options are the following:
+{
+  required: {
+    required: true
+  },
+  email: {
+    min_length: 6,
+    regex: /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i
+  },
+  password: {
+    min_length: 6,
+  },
+  password_confirmation: {
+    must_match: '#password',
+    message: 'must match password',
+  }
+}
+To override these options or add new ones simply pass your options to the valtastic method.
+
+For example:
+
+$(document).ready(function(){
+  $('.formtastic').valtastic({
+    username: {
+      min_length: 5,
+      regex: /^[A-Za-z0-9]$/,
+      message: 'must be at least 5 characters and only contain numbers and letters',
+    },
+    password_confirmation: {
+      must_match: '#user_password',
+      message: 'must match password',
+    }
+  });
+});

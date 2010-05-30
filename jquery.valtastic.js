@@ -109,7 +109,6 @@ if (!Array.unique){
               errors.push(requirements.message || "this field must be a valid " + this + " format");
             }
             if (requirements.must_match && $(requirements.must_match).val() != value){
-              console.log(requirements.must_match);
               errors.push(requirements.message);
             }
           }
